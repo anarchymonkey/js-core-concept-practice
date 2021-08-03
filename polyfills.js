@@ -134,4 +134,27 @@ console.log("Inbuilt array reducer resp \n", reducedArray);
 console.log("Custom array reducer resp \n", customReducedArray);
 
 
-// CALL, APPLY, BIND POLYFILL
+// DBOUNCE POLYFILL
+
+// debounce takes a function and a delay after which the function should be triggered
+// if someone performs an action before the delay time has occoured, it will again start the timer from scratch
+// i.e if there is a delay of 1000ms and somebody performs the event before 1000ms then the counter will again start from 0ms and go till 1000ms
+// thus executing the function after the context time has expired
+
+const debounce = (func, delay) => {
+    let timer;
+    return function () {
+        const context = this;
+        const args = arguments;
+        clearTimeout(timer);
+        setTimeout(() => func.apply(context, args), delay);
+    }
+}
+
+const print = () => console.log('Print this');
+console.log('debounce', debounce(print, 5000)());
+
+
+
+// CALL APPLY BIND
+
