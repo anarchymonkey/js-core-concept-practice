@@ -152,9 +152,70 @@ const debounce = (func, delay) => {
 }
 
 const print = () => console.log('Print this');
-console.log('debounce', debounce(print, 5000)());
+debounce(print, 0)();
 
 
 
 // CALL APPLY BIND
+
+/* 
+
+BIND
+
+*/
+
+
+const dummyObject = {
+    firstName: 'Aniket',
+    lastName: 'Batabyal',
+}
+
+
+const trialFunction = function (val, dum) {
+    console.log(this.firstName + this.lastName, val, dum);
+}
+
+const normalBindFunction = trialFunction.bind(dummyObject);
+
+
+Function.prototype.myCustomBind = function (context, args) {
+    // get the parent function
+    const parentFunction = this;
+    // return a function which applies the arguments as context & adds extra arguments
+    return function(dummy) {
+        // return the function cause it can do something
+        return parentFunction.call(context, dummy, args);
+    }
+}
+
+
+trialFunction.bind(dummyObject)('bindFunction');
+trialFunction.myCustomBind(dummyObject, "1234")('customBindFunction');
+
+
+/* 
+
+Call
+
+*/
+
+const trialFunctionForCall = function (...args) {
+    console.log(this.firstName + this.lastName, 'arguments', args);
+}
+
+Function.prototype.myCustomCall = function(context, ...parentArgs) {
+    const parentFunction = this;
+
+    const res = function (...otherArgs) {
+        parentFunction.apply(context, [...parentArgs, ...otherArgs])
+    }
+
+    res();
+}
+
+trialFunctionForCall.call(dummyObject, "Hey Mama");
+trialFunctionForCall.myCustomCall(dummyObject, "Hey Mama", "123142");
+
+// trialFunction.myCustomBind(dummyObject, "1234")('customBindFunction');
+
 
