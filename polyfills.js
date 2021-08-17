@@ -219,3 +219,65 @@ trialFunctionForCall.myCustomCall(dummyObject, "Hey Mama", "123142");
 // trialFunction.myCustomBind(dummyObject, "1234")('customBindFunction');
 
 
+
+// write a function which transforms these two objects into the below object
+
+
+const removeDuplicates = (input1, input2, res = {}) => {
+
+    Object.keys(input1).forEach((firstKey) => {
+        
+    });
+};
+
+
+
+const main = () => {
+    
+    const input1 = {
+        a: 'a1',
+        b: 'b2',
+        g: {
+            a: 'q',
+            c: {
+                c1: 'c1',
+                c2: 'c2',
+            },
+        },
+        d: 'd1',
+        f: 'f1',
+    };
+    
+    const input2 = {
+        a: 'a1',
+        g: {
+            a: 'p',
+            c: {
+                c1: 'c1',
+                c2: 'c2',
+                c3: 'c3',
+            },
+        },
+        d: 'd2',
+    };
+    
+    const output = {
+        b: 'b2',
+        g: {
+            a: 'q',
+            c: {
+                c3: 'c3',
+            },
+        },
+        d: 'd1',
+        f: 'f1',
+    };
+
+    
+    const res = removeDuplicates(input1, input2);
+    console.log('The result is', res);
+}
+
+main();
+
+
